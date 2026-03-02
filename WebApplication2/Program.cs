@@ -1,6 +1,8 @@
 using Application.Countries;
+using Application.States;
 using Infrastructure;
 using Infrastructure.Repositories.Countries;
+using Infrastructure.Repositories.States;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +18,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<ICountryRepository, CountryRepository>();
-
 builder.Services.AddTransient<ICountryApplication, CountryApplication>();
+builder.Services.AddTransient<IStateRepository,StateRepository>();
+builder.Services.AddTransient<IStateApplication,StateApplication>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
