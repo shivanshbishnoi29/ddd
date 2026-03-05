@@ -21,15 +21,32 @@ public class StateController : ControllerBase
     //public IActionResult Test()
     //{
 
-    //    //return Ok("State created successfully"); // success 200 code
+    //    return Ok("State created successfully"); // success 200 code
+    //    //return BadRequest("State created successfully"); // bad request  400 code
+    //}
+
+    //[HttpGet("test-2")]
+    //public ActionResult<CountryDto> Test2()
+    //{
+    //    return new CountryDto();
+    //    return Ok("State created successfully"); // success 200 code
     //    //return BadRequest("State created successfully"); // bad request  400 code
     //}
 
 
     [HttpPost]
-    public async Task AddState(CreateUpdateStateDto input)
+    public async Task<ActionResult> AddState(CreateUpdateStateDto input)
     {
-        await _stateApplication.AddState(input);
+        try
+        {
+            await _stateApplication.AddState(input);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 
     [HttpPut("{id}")]

@@ -1,3 +1,4 @@
+using Application.Common;
 using Application.Countries;
 using Application.States;
 using Infrastructure;
@@ -21,6 +22,8 @@ builder.Services.AddTransient<ICountryRepository, CountryRepository>();
 builder.Services.AddTransient<ICountryApplication, CountryApplication>();
 builder.Services.AddTransient<IStateRepository,StateRepository>();
 builder.Services.AddTransient<IStateApplication,StateApplication>();
+
+builder.Services.AddAutoMapper(typeof(Mapping));
 
 builder.Services.AddSwaggerGen();
 
